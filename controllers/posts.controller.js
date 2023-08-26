@@ -66,3 +66,54 @@ exports.getPostAllComments = (req, res, next) => {
     });
   });
 };
+
+//like and dislike
+exports.likePost = (req, res, next) => {
+  const data = {
+    postId: req.body.postId,
+  };
+  postsService.likePost(data, (error, results) => {
+    if (error) {
+      console.log(error);
+      return res.status(400).send({ success: 0, data: "Bad request" });
+    }
+    return res.status(200).send({
+      success: 1,
+      data: results,
+    });
+  });
+};
+
+exports.dislikePost = (req, res, next) => {
+  const data = {
+    postId: req.body.postId,
+  };
+  postsService.dislikePost(data, (error, results) => {
+    if (error) {
+      console.log(error);
+      return res.status(400).send({ success: 0, data: "Bad request" });
+    }
+    return res.status(200).send({
+      success: 1,
+      data: results,
+    });
+  });
+};
+
+exports.deletePost = (req, res, next) => {
+  const data = {
+    postId: req.query.postId,
+  };
+  postsService.deletePost(data, (error, results) => {
+    if (error) {
+      console.log(error);
+      return res.status(400).send({ success: 0, data: "Bad request" });
+    }
+    return res.status(200).send({
+      success: 1,
+      data: results,
+    });
+  });
+};
+
+
